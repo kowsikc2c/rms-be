@@ -1,13 +1,18 @@
 const express = require("express");
 // const bodyParser = require("body-parser"); /* deprecated */
 const cors = require("cors");
-
+var mysql = require('mysql');
+const connection = require("./app/models/db.js");
 const app = express();
 
 var corsOptions = {
   origin: "http://localhost:8081"
 };
 
+connection.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
